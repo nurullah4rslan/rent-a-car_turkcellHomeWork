@@ -3,27 +3,31 @@ package kodlama.io.rentacar.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import kodlama.io.rentacar.entities.enums.State;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-//lombak
-@Table(name = "brands")
-public class Brand {
+
+@Table(name = "cars")
+public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    @OneToMany(mappedBy = "brand")
-//    @JsonBackReference
-    private List<Model> models;
+    private int modelYear;
+    private String plate;
+    private double dailyPrice;
+    @Enumerated(EnumType.STRING)
+    private State state;
+    @ManyToOne
+    @JoinColumn(name = "model_id")
+//    @JsonManagedReference
+    private Model model;
 
 }

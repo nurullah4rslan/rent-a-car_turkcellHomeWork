@@ -1,13 +1,19 @@
 package kodlama.io.rentacar.business.abstracts;
 
+import kodlama.io.rentacar.business.dto.requests.create.CreateBrandRequest;
+import kodlama.io.rentacar.business.dto.requests.update.UpdateBrandRequest;
+import kodlama.io.rentacar.business.dto.responses.create.CreateBrandResponse;
+import kodlama.io.rentacar.business.dto.responses.get.GetAllBrandsResponse;
+import kodlama.io.rentacar.business.dto.responses.get.GetBrandResponse;
+import kodlama.io.rentacar.business.dto.responses.update.UpdateBrandResponse;
 import kodlama.io.rentacar.entities.Brand;
 
 import java.util.List;
 
 public interface BrandServices {
-    List<Brand> getAll();
-    Brand add(Brand brand);
-    Brand getById(int id);
+    List<GetAllBrandsResponse> getAll();
+    CreateBrandResponse add(CreateBrandRequest request);
+    GetBrandResponse getById(int id);
     void delete(int id);
-    Brand update(int id ,Brand brand);
+    UpdateBrandResponse update(int id , UpdateBrandRequest request);
 }

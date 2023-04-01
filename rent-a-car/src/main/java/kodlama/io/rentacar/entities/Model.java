@@ -15,15 +15,20 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-//lombak
-@Table(name = "brands")
-public class Brand {
+
+@Table(name = "models")
+public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToMany(mappedBy = "brand")
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+//    @JsonManagedReference
+    private Brand brand;
+    @OneToMany(mappedBy = "model")
 //    @JsonBackReference
-    private List<Model> models;
+    private List<Car> cars;
 
 }
+

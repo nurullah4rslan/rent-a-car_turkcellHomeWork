@@ -1,6 +1,12 @@
 package kodlama.io.rentacar.api.controllers;
 
 import kodlama.io.rentacar.business.abstracts.BrandServices;
+import kodlama.io.rentacar.business.dto.requests.create.CreateBrandRequest;
+import kodlama.io.rentacar.business.dto.requests.update.UpdateBrandRequest;
+import kodlama.io.rentacar.business.dto.responses.create.CreateBrandResponse;
+import kodlama.io.rentacar.business.dto.responses.get.GetAllBrandsResponse;
+import kodlama.io.rentacar.business.dto.responses.get.GetBrandResponse;
+import kodlama.io.rentacar.business.dto.responses.update.UpdateBrandResponse;
 import kodlama.io.rentacar.entities.Brand;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,24 +22,24 @@ private final BrandServices services;
         this.services = service;
     }
     @GetMapping("/getAll")
-    public List<Brand> findAll(){
+    public List<GetAllBrandsResponse> findAll(){
         return services.getAll();
     }
 
     @GetMapping("/getId/{id}")
-    public Brand getById(@PathVariable int id) {
+    public GetBrandResponse getById(@PathVariable int id) {
         return services.getById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Brand add(@RequestBody Brand brand) {
-        return services.add(brand);
+    public CreateBrandResponse add(@RequestBody CreateBrandRequest request) {
+        return services.add(request);
     }
 
     @PutMapping("/update/{id}")
-    public Brand update(@PathVariable int id, @RequestBody Brand brand) {
-        return services.update(id, brand);
+    public UpdateBrandResponse update(@PathVariable int id, @RequestBody UpdateBrandRequest request) {
+        return services.update(id, request);
     }
 
     @DeleteMapping("/delete/{id}")
