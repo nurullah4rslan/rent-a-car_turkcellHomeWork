@@ -13,5 +13,5 @@ import lombok.Setter;
 public class GetModelResponse {
     private int id;
     private String name;
-    private int brand_id;
+    private int brandId;
 }

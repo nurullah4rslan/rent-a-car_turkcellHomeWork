@@ -26,7 +26,6 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private State state;
     @ManyToOne
-    @JoinColumn(name = "model_id")
 //    @JsonManagedReference
     private Model model;
 

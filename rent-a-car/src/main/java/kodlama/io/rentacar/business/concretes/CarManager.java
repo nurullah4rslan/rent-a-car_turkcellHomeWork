@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,13 +23,16 @@ public class CarManager implements CarServices {
     private final ModelMapper mapper;
     @Override
     public List<GetAllCarsResponse> getAll() {
-
+//        List<Car> cars = repository.findAll();
+//        List<GetAllCarsResponse> response = cars
+//                .stream()
+//                .map(car -> mapper.map(car,GetAllCarsResponse.class))
+//                .toList();
+//        checkIfGetAllSize(response.size());
+//        return response;
+        List<GetAllCarsResponse> response = new ArrayList<>();
         List<Car> cars = repository.findAll();
-        List<GetAllCarsResponse> response = cars
-                .stream()
-                .map(car -> mapper.map(car,GetAllCarsResponse.class)).
-                toList();
-        checkIfGetAllSize(response.size());
+        cars.stream().forEach(car -> response.add(mapper.map(car,GetAllCarsResponse.class)));
         return response;
     }
 
