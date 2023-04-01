@@ -8,6 +8,7 @@ import kodlama.io.rentacar.business.dto.responses.get.GetAllCarsResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetCarResponse;
 import kodlama.io.rentacar.business.dto.responses.update.UpdateCarResponse;
 import kodlama.io.rentacar.entities.Car;
+import kodlama.io.rentacar.entities.enums.State;
 import kodlama.io.rentacar.repository.CarRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,16 +24,12 @@ public class CarManager implements CarServices {
     private final ModelMapper mapper;
     @Override
     public List<GetAllCarsResponse> getAll() {
-//        List<Car> cars = repository.findAll();
-//        List<GetAllCarsResponse> response = cars
-//                .stream()
-//                .map(car -> mapper.map(car,GetAllCarsResponse.class))
-//                .toList();
-//        checkIfGetAllSize(response.size());
-//        return response;
-        List<GetAllCarsResponse> response = new ArrayList<>();
         List<Car> cars = repository.findAll();
-        cars.stream().forEach(car -> response.add(mapper.map(car,GetAllCarsResponse.class)));
+        List<GetAllCarsResponse> response = cars
+                .stream().filter((car)-> !car.getState().equals(State.MAINTENANCE))
+                .map(car -> mapper.map(car,GetAllCarsResponse.class))
+                .toList();
+        checkIfGetAllSize(response.size());
         return response;
     }
 
@@ -61,7 +58,9 @@ public class CarManager implements CarServices {
 
     @Override
     public UpdateCarResponse update(int id, UpdateCarRequest request) {
+        Car car2 = repository.findById(id).orElseThrow();
         Car car = mapper.map(request,Car.class);
+        checkIfCarState(car2.getState(),request.getState());
         car.setId(id);
         repository.save(car);
         UpdateCarResponse response = mapper.map(car,UpdateCarResponse.class);
@@ -75,5 +74,9 @@ public class CarManager implements CarServices {
     }
     private void checkIfGetAllSize(int size){
         if (size==0)throw new RuntimeException("Araba bulunmamaktadır.");
+    }
+    private void checkIfCarState(State state,State state2){
+        if(state.equals(State.MAINTENANCE) && state2.equals(State.MAINTENANCE))throw  new RuntimeException("Bakımdaki ürün bakıma gönderilemez");
+        else if(state.equals(State.RENTED) && state2.equals(State.MAINTENANCE))throw new RuntimeException("Kirada olan araba bakıma gidemez.");
     }
 }
