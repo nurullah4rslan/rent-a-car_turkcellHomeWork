@@ -9,7 +9,7 @@ import kodlama.io.rentacar.business.dto.responses.update.UpdateModelResponse;
 
 import java.util.List;
 
-public interface ModelServices {
+public interface ModelService {
     List<GetAllModelsResponse> getAll();
     CreateModelResponse add(CreateModelRequest request);
     GetModelResponse getById(int id);

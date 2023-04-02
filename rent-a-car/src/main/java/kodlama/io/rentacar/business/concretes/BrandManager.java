@@ -1,6 +1,6 @@
 package kodlama.io.rentacar.business.concretes;
 
-import kodlama.io.rentacar.business.abstracts.BrandServices;
+import kodlama.io.rentacar.business.abstracts.BrandService;
 import kodlama.io.rentacar.business.dto.requests.create.CreateBrandRequest;
 import kodlama.io.rentacar.business.dto.requests.update.UpdateBrandRequest;
 import kodlama.io.rentacar.business.dto.responses.create.CreateBrandResponse;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 @AllArgsConstructor
-public class BrandManager implements BrandServices {
+public class BrandManager implements BrandService {
     private final BrandRepository repository;
     private final ModelMapper mapper;
 

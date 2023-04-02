@@ -1,6 +1,6 @@
 package kodlama.io.rentacar.business.concretes;
 
-import kodlama.io.rentacar.business.abstracts.ModelServices;
+import kodlama.io.rentacar.business.abstracts.ModelService;
 import kodlama.io.rentacar.business.dto.requests.create.CreateModelRequest;
 import kodlama.io.rentacar.business.dto.requests.update.UpdateModelRequest;
 import kodlama.io.rentacar.business.dto.responses.create.CreateModelResponse;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ModelManager implements ModelServices {
+public class ModelManager implements ModelService {
     private final ModelRepository repository;
     private final ModelMapper mapper;
 

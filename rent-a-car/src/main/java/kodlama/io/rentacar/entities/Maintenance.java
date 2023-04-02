@@ -6,22 +6,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Date;
 
 @Entity
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-//lombak
-@Table(name = "brands")
-public class Brand {
+public class Maintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    @OneToMany(mappedBy = "brand")
-//    @JsonBackReference
-    private List<Model> models;
+    @ManyToOne
+    private Car car;
+    private Date localTime;
+    private Date exitTime;
+    private String description;
+
 
 }

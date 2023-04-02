@@ -6,11 +6,10 @@ import kodlama.io.rentacar.business.dto.responses.create.CreateBrandResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetAllBrandsResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetBrandResponse;
 import kodlama.io.rentacar.business.dto.responses.update.UpdateBrandResponse;
-import kodlama.io.rentacar.entities.Brand;
 
 import java.util.List;
 
-public interface BrandServices {
+public interface BrandService {
     List<GetAllBrandsResponse> getAll();
     CreateBrandResponse add(CreateBrandRequest request);
     GetBrandResponse getById(int id);

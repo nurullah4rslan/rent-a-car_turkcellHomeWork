@@ -1,6 +1,6 @@
 package kodlama.io.rentacar.business.concretes;
 
-import kodlama.io.rentacar.business.abstracts.CarServices;
+import kodlama.io.rentacar.business.abstracts.CarService;
 import kodlama.io.rentacar.business.dto.requests.create.CreateCarRequest;
 import kodlama.io.rentacar.business.dto.requests.update.UpdateCarRequest;
 import kodlama.io.rentacar.business.dto.responses.create.CreateCarResponse;
@@ -14,12 +14,11 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class CarManager implements CarServices {
+public class CarManager implements CarService {
     private final CarRepository repository;
     private final ModelMapper mapper;
     @Override
